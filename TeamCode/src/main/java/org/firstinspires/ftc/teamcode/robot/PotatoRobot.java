@@ -51,7 +51,7 @@ public class PotatoRobot implements Robot {
 
     public void rightMotors(double power) {
         frontRight.setPower(power);
-        frontRight.setPower(power);
+        backRight.setPower(power);
     }
 
     public void straightDrive(double leftPower, double rightPower) {

@@ -18,7 +18,7 @@ public class Potato extends LinearOpMode {
      */
     @Override
     public void runOpMode() {
-        // Initalize the potato
+        // Initialize the potato
         PotatoRobot potato = new PotatoRobot(hardwareMap, telemetry);
 
         // Wait for the game to start (driver presses PLAY)
@@ -31,7 +31,6 @@ public class Potato extends LinearOpMode {
             // Setup a variable for each drive wheel to save power level for telemetry
             double leftPower;
             double rightPower;
-            double strafePower;
 
             // Choose to drive using either Tank Mode, or POV Mode
             // Comment out the method that's not used.  The default below is POV.
@@ -39,18 +38,20 @@ public class Potato extends LinearOpMode {
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
             double drive = -gamepad1.left_stick_y;
-            double strafe = gamepad1.left_stick_x;
             double turn = gamepad1.right_stick_x;
-            leftPower = Range.clip(drive + turn, -1.0, 1.0);
-            rightPower = Range.clip(drive - turn, -1.0, 1.0);
-            strafePower = Range.clip(strafe, -1.0, 1.0);
+            if (gamepad1.left_stick_y < -0.13 || gamepad1.left_stick_y > 0.13) {
+                leftPower = Range.clip(drive + turn, -1.0, 1.0);
+                rightPower = Range.clip(drive - turn, -1.0, 1.0);
 
-            potato.straightDrive(leftPower, rightPower);
-            potato.strafeLeft(strafePower);
+                potato.straightDrive(leftPower, rightPower);
+            } else if (gamepad1.left_stick_x < -0.13 || gamepad1.left_stick_x > 0.13) {
+                potato.strafeRight(gamepad1.left_stick_x);
+            } else {
+                potato.straightDrive(0, 0);
+            }
 
-            // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "left (%.2f), right (%.2f), strafe (%.2f)", leftPower, rightPower, strafePower);
+//            telemetry.addData("Motors", "left (%.2f), right (%.2f), strafe (%.2f)", leftPower, rightPower, strafePower);
             telemetry.update();
         }
     }
