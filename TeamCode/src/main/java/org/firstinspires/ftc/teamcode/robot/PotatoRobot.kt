@@ -8,20 +8,15 @@ import org.firstinspires.ftc.robotcore.external.Telemetry
 class PotatoRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
     // Declare OpMode members.
-    private val frontLeft: DcMotor
-    private val frontRight: DcMotor
-    private val backLeft: DcMotor
-    private val backRight: DcMotor
-
+    private val frontLeft: DcMotor = hardwareMap.get(DcMotor::class.java, "front_left")
+    private val frontRight: DcMotor = hardwareMap.get(DcMotor::class.java, "front_right")
+    private val backLeft: DcMotor = hardwareMap.get(DcMotor::class.java, "back_left")
+    private val backRight: DcMotor = hardwareMap.get(DcMotor::class.java, "back_right")
 
     override val name: String
         get() = "Potato"
 
     init {
-        frontLeft = hardwareMap.get(DcMotor::class.java, "front_left")
-        frontRight = hardwareMap.get(DcMotor::class.java, "front_right")
-        backLeft = hardwareMap.get(DcMotor::class.java, "back_left")
-        backRight = hardwareMap.get(DcMotor::class.java, "back_right")
 
         frontLeft.direction = DcMotorSimple.Direction.FORWARD
         frontRight.direction = DcMotorSimple.Direction.REVERSE
