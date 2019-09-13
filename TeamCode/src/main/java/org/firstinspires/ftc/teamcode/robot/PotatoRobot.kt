@@ -13,9 +13,6 @@ class PotatoRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
     private val backLeft: DcMotor = hardwareMap.get(DcMotor::class.java, "back_left")
     private val backRight: DcMotor = hardwareMap.get(DcMotor::class.java, "back_right")
 
-    override val name: String
-        get() = "Potato"
-
     init {
 
         frontLeft.direction = DcMotorSimple.Direction.FORWARD
@@ -30,6 +27,9 @@ class PotatoRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
         this.introduceSelf(telemetry)
     }
+
+    override val name: String
+        get() = "Potato"
 
     override fun introduceSelf(telemetry: Telemetry) {
         telemetry.addData("Hello!", this.name + " reporting for duty!")
