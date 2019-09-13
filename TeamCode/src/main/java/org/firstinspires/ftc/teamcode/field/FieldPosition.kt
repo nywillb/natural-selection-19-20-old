@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.field;
+package org.firstinspires.ftc.teamcode.field
 
 /**
  * Field position shows the position of the robot on the field
  */
-public enum FieldPosition {
+enum class FieldPosition {
     /**
      * Red 1 is the space farther from the audience on the red side
      */
