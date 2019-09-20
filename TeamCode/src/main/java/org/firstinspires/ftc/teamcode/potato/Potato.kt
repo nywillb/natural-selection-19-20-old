@@ -40,6 +40,20 @@ class Potato : LinearOpMode() {
                 potato.straightDrive(0.0, 0.0)
             }
 
+            if (gamepad1.left_trigger > 0.13) {
+                potato.nomNomNom(Range.clip(gamepad1.left_trigger.toDouble(), 0.0, 1.0))
+            } else {
+                potato.nomNomNom(0.0)
+            }
+
+            if (gamepad1.dpad_up) {
+                potato.lift(0.5)
+            } else if (gamepad1.dpad_down) {
+                potato.lift(-0.5)
+            } else {
+                potato.lift(0.0)
+            }
+
             telemetry.addData("Status", "Run Time: $runtime")
             telemetry.update()
         }
