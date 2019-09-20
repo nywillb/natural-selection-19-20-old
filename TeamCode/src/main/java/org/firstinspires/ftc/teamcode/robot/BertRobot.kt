@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.robot
 
 import com.qualcomm.robotcore.hardware.*
 import org.firstinspires.ftc.robotcore.external.Telemetry
+import org.firstinspires.ftc.teamcode.bert.SpinnerPosition
 
 class BertRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
@@ -16,13 +17,36 @@ class BertRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
     val lift: DcMotor = hardwareMap.get(DcMotor::class.java, "lift")
 
-    val flicker: CRServo = hardwareMap.get(CRServo::class.java, "flicker")
-    val spinner: CRServo = hardwareMap.get(CRServo::class.java, "spinner")
+    val flicker: Servo = hardwareMap.get(Servo::class.java, "flicker")
+    val spinner: Servo = hardwareMap.get(Servo::class.java, "spinner")
     val claw: Servo = hardwareMap.get(Servo::class.java, "claw")
 
     var flickerIsOut = false
         set(value) {
-            field = value;
+            if(value) {
+                flicker.position = 0.88
+            } else flicker.position = 0.53
+            field = value
+        }
+
+    var clawIsOpen = true
+        set(value) {
+            if(value) {
+                claw.position = 0.55
+            } else claw.position = 0.24
+            field = value
+        }
+
+    var spinnerPosition = SpinnerPosition.IN
+        set(value) {
+            if(value == SpinnerPosition.IN) {
+                spinner.position = 0.12
+            } else if (value == SpinnerPosition.HALF) {
+                spinner.position = 0.47
+            } else if (value == SpinnerPosition.OUT) {
+                spinner.position = 0.81
+            }
+            field = value
         }
 
 //    private val xOdometer: DcMotor = hardwareMap.get(DcMotor::class.java, "x_odometer");

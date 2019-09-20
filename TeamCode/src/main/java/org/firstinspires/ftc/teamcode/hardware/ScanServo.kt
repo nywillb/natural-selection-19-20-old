@@ -61,7 +61,7 @@ class ConceptScanServo : LinearOpMode() {
 
         // Connect to servo (Assume PushBot Left Hand)
         // Change the text in quotes to match any servo name on your robot.
-        servo = hardwareMap.get(Servo::class.java, "claw")
+        servo = hardwareMap.get(Servo::class.java, "spinner")
 
         // Wait for the start button
         telemetry.addData(">", "Press Start to scan Servo.")
@@ -75,10 +75,10 @@ class ConceptScanServo : LinearOpMode() {
             // slew the servo, according to the rampUp (direction) variable.
             if (gamepad1.left_bumper) {
                 // Keep stepping up until we hit the max value.
-                position = position + INCREMENT
+                position += INCREMENT
             } else if (gamepad1.right_bumper) {
                 // Keep stepping down until we hit the min value.
-                position = position - INCREMENT
+                position -= INCREMENT
             }
 
             // Display the current value

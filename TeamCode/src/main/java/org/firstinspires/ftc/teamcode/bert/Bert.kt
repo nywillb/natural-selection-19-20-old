@@ -11,6 +11,12 @@ class Bert : LinearOpMode() {
 
     // Show running time.
     private val runtime = ElapsedTime()
+    private val spinnerPositions = listOf(SpinnerPosition.HALF, SpinnerPosition.OUT)
+    private var currentSpinnerPosition = 0
+
+    private var debounceA = false
+    private var debounceX = false
+    private var debounceY = false
 
 
     /**
@@ -53,6 +59,27 @@ class Bert : LinearOpMode() {
             } else {
                 bert.lift(0.0)
             }
+
+            if(gamepad1.a && !debounceA) {
+                currentSpinnerPosition++
+                currentSpinnerPosition %= spinnerPositions.size
+                bert.spinnerPosition = spinnerPositions[currentSpinnerPosition]
+            } else if (gamepad1.b) {
+                currentSpinnerPosition = 0
+                bert.spinnerPosition = SpinnerPosition.IN
+            }
+
+            if(gamepad1.x && !debounceX) {
+                bert.clawIsOpen = !bert.clawIsOpen
+            }
+
+            if(gamepad1.y && !debounceY) {
+                bert.flickerIsOut = !bert.flickerIsOut
+            }
+
+            debounceA = gamepad1.a
+            debounceX = gamepad1.x
+            debounceY = gamepad1.y
 
             telemetry.addData("Status", "Run Time: $runtime")
             telemetry.update()
