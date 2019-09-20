@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.robot
 import com.qualcomm.robotcore.hardware.*
 import org.firstinspires.ftc.robotcore.external.Telemetry
 
-class OmniRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
+class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
     val frontLeft: DcMotor = hardwareMap.get(DcMotor::class.java, "front_left")
     val frontRight: DcMotor = hardwareMap.get(DcMotor::class.java, "front_right")
@@ -107,6 +107,6 @@ class OmniRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
     }
 
     override val name: String
-        get() = "Omni"
+        get() = "Pyppyn"
 
 }

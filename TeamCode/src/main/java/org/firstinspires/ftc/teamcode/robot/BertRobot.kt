@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.robot
 import com.qualcomm.robotcore.hardware.*
 import org.firstinspires.ftc.robotcore.external.Telemetry
 
-class PotatoRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
+class BertRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
     // Declare OpMode members.
     val frontLeft: DcMotor = hardwareMap.get(DcMotor::class.java, "front_left")
@@ -60,7 +60,7 @@ class PotatoRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
     }
 
     override val name: String
-        get() = "Potato"
+        get() = "Bert"
 
     override fun introduceSelf(telemetry: Telemetry) {
         telemetry.addData("Hello!", this.name + " reporting for duty!")
