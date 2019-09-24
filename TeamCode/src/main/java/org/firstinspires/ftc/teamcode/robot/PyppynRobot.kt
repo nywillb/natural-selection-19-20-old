@@ -20,10 +20,10 @@ class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
     var topClawIsOpen = false
         set(value) {
             if (value) {
-                claw.position = 0.92
+                topClaw.position = 0.54
                 field = value
             } else {
-                claw.position = 0.76
+                topClaw.position = 0.40
                 field = value
             }
         }

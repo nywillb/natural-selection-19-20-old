@@ -49,8 +49,8 @@ class Pyppyn : LinearOpMode() {
                 if (gamepad1.b) pyppyn.slowRotateCounterclockwise(SLOW_MODE_SPIN_SPEED)
                 else pyppyn.rotateCounterclockwise(SPIN_SPEED)
             } else if (gamepad1.right_stick_x < -0.13) {
-                if (gamepad1.b) pyppyn.rotateClockwise(SLOW_MODE_SPIN_SPEED)
-                else pyppyn.slowRotateClockwise(SPIN_SPEED)
+                if (gamepad1.b) pyppyn.slowRotateClockwise(SLOW_MODE_SPIN_SPEED)
+                else pyppyn.rotateClockwise(SPIN_SPEED)
             } else if (gamepad1.left_stick_x < -0.13 || gamepad1.left_stick_x > 0.13) {
                 pyppyn.strafeRight(gamepad1.left_stick_x.toDouble())
             } else if (gamepad1.dpad_up) {
