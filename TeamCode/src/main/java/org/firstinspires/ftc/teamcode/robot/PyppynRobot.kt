@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.robot
 
 import com.qualcomm.robotcore.hardware.*
 import org.firstinspires.ftc.robotcore.external.Telemetry
+import java.lang.Thread.sleep
 
 class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
@@ -13,6 +14,19 @@ class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
     val lift: DcMotor = hardwareMap.get(DcMotor::class.java, "lift")
 
     val claw: Servo = hardwareMap.get(Servo::class.java, "claw")
+
+    val topClaw: Servo = hardwareMap.get(Servo::class.java, "top_claw")
+
+    var topClawIsOpen = false
+        set(value) {
+            if (value) {
+                claw.position = 0.92
+                field = value
+            } else {
+                claw.position = 0.76
+                field = value
+            }
+        }
 
     var clawIsOpen = false
         set(value) {

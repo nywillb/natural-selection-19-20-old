@@ -59,9 +59,12 @@ class ConceptScanServo : LinearOpMode() {
 
     override fun runOpMode() {
 
+        var current = 0
+        val servos = hardwareMap.allDeviceMappings.filterIsInstance<Servo>()
+
         // Connect to servo (Assume PushBot Left Hand)
         // Change the text in quotes to match any servo name on your robot.
-        servo = hardwareMap.get(Servo::class.java, "spinner")
+        servo = hardwareMap.get(Servo::class.java, "top_claw")
 
         // Wait for the start button
         telemetry.addData(">", "Press Start to scan Servo.")
