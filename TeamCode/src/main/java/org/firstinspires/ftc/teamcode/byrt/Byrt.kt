@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.Range
 import org.firstinspires.ftc.teamcode.robot.BertRobot
 
 @TeleOp(name = "\uD83D\uDC1D Bert", group = "Bert")
-class Bert : LinearOpMode() {
+class Byrt : LinearOpMode() {
 
     // Show running time.
     private val runtime = ElapsedTime()
