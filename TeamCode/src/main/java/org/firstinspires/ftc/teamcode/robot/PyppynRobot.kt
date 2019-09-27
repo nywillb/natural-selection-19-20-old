@@ -18,6 +18,20 @@ class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
     val leftSpinner: DcMotor = hardwareMap.get(DcMotor::class.java, "left_spinner")
     val rightSpinner: DcMotor = hardwareMap.get(DcMotor::class.java, "right_spinner")
 
+
+    val clawServo: Servo = hardwareMap.get(Servo::class.java, "claw_servo")
+
+    var clawIsOpen = false
+        set(value) {
+            if (value) {
+                clawServo.position = 0.92
+                field = value
+            } else {
+                clawServo.position = 0.76
+                field = value
+            }
+        }
+
     init {
         frontLeft.direction = DcMotorSimple.Direction.FORWARD
         backLeft.direction = DcMotorSimple.Direction.FORWARD
@@ -42,6 +56,8 @@ class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
         leftSpinner.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
         rightSpinner.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
+
+        clawServo.position = 0.62
 
         this.introduceSelf(telemetry)
     }

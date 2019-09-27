@@ -81,6 +81,9 @@ class Pyppyn : LinearOpMode() {
             if (gamepad2.b) pyppyn.nomNomNom(-1.0)
             else pyppyn.nomNomNom(0.0)
 
+
+            if (gamepad2.y && !debounce2Y) pyppyn.clawIsOpen = !pyppyn.clawIsOpen
+
             debounce2A = gamepad2.a
             debounce2B = gamepad2.b
             debounce2X = gamepad2.x
