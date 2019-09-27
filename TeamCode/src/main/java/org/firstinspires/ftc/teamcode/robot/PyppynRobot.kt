@@ -13,31 +13,10 @@ class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
     val lift: DcMotor = hardwareMap.get(DcMotor::class.java, "lift")
 
-    val claw: Servo = hardwareMap.get(Servo::class.java, "claw")
+    val claw: DcMotor = hardwareMap.get(DcMotor::class.java, "claw")
 
-    val topClaw: Servo = hardwareMap.get(Servo::class.java, "top_claw")
-
-    var topClawIsOpen = false
-        set(value) {
-            if (value) {
-                topClaw.position = 0.54
-                field = value
-            } else {
-                topClaw.position = 0.40
-                field = value
-            }
-        }
-
-    var clawIsOpen = false
-        set(value) {
-            if (value) {
-                claw.position = 0.92
-                field = value
-            } else {
-                claw.position = 0.76
-                field = value
-            }
-        }
+    val leftSpinner: DcMotor = hardwareMap.get(DcMotor::class.java, "left_spinner")
+    val rightSpinner: DcMotor = hardwareMap.get(DcMotor::class.java, "right_spinner")
 
     init {
         frontLeft.direction = DcMotorSimple.Direction.FORWARD
@@ -47,6 +26,11 @@ class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
         lift.direction = DcMotorSimple.Direction.FORWARD
 
+        leftSpinner.direction = DcMotorSimple.Direction.FORWARD
+        rightSpinner.direction = DcMotorSimple.Direction.REVERSE
+
+        claw.direction = DcMotorSimple.Direction.FORWARD
+
         frontLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         backLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         frontRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
@@ -54,7 +38,10 @@ class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
 
         lift.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
 
-        claw.position = 0.62
+        claw.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+
+        leftSpinner.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
+        rightSpinner.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.FLOAT
 
         this.introduceSelf(telemetry)
     }
@@ -113,6 +100,15 @@ class PyppynRobot(hardwareMap: HardwareMap, telemetry: Telemetry) : Robot {
         backLeft.power = 0.0
         frontRight.power = 0.0
         backRight.power = 0.0
+    }
+
+    fun moveClaw(power: Double) {
+        claw.power = power
+    }
+
+    fun nomNomNom(power: Double) {
+        leftSpinner.power = power
+        rightSpinner.power = power
     }
 
     override fun introduceSelf(telemetry: Telemetry) {

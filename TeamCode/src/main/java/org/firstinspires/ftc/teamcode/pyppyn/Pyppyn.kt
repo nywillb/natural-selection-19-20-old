@@ -18,6 +18,7 @@ class Pyppyn : LinearOpMode() {
     private val SLOW_MODE_SPEED = 0.3
     private val SPIN_SPEED = 0.5
     private val SLOW_MODE_SPIN_SPEED = 0.3
+    private val MAX_CLAW_SPEED = 0.3
 
     private var debounce2A = false
     private var debounce2B = false
@@ -65,17 +66,20 @@ class Pyppyn : LinearOpMode() {
                 pyppyn.stop()
             }
 
-            if (gamepad2.left_trigger > 0.13) {
-                pyppyn.lift(Range.clip(gamepad2.left_trigger.toDouble(), 0.0, MAX_LIFT_SPEED))
-            } else if (gamepad2.right_trigger > 0.13) {
-                pyppyn.lift(-Range.clip(gamepad2.right_trigger.toDouble(), 0.0, MAX_LIFT_SPEED))
-            } else {
-                pyppyn.lift(0.0)
+            when {
+                gamepad2.left_trigger > 0.13 -> pyppyn.lift(Range.clip(gamepad2.left_trigger.toDouble(), 0.0, MAX_LIFT_SPEED))
+                gamepad2.right_trigger > 0.13 -> pyppyn.lift(-Range.clip(gamepad2.right_trigger.toDouble(), 0.0, MAX_LIFT_SPEED))
+                else -> pyppyn.lift(0.0)
             }
 
 
-            if (gamepad2.b && !debounce2B) pyppyn.topClawIsOpen = !pyppyn.topClawIsOpen
-            if (gamepad2.y && !debounce2Y) pyppyn.clawIsOpen = !pyppyn.clawIsOpen
+            if (gamepad2.left_stick_y > 0.13 || gamepad2.left_stick_y < -0.13) {
+                pyppyn.moveClaw(Range.clip(gamepad2.left_stick_y.toDouble(), 0.0, MAX_CLAW_SPEED))
+            } else pyppyn.moveClaw(0.0)
+
+            if (gamepad2.a) pyppyn.nomNomNom(1.0)
+            if (gamepad2.b) pyppyn.nomNomNom(-1.0)
+            else pyppyn.nomNomNom(0.0)
 
             debounce2A = gamepad2.a
             debounce2B = gamepad2.b
